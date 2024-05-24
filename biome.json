@@ -1,0 +1,45 @@
+{
+	"formatter": {
+		"enabled": true,
+		"formatWithErrors": false,
+		"ignore": [],
+		"attributePosition": "multiline",
+		"indentStyle": "tab",
+		"indentWidth": 2,
+		"lineEnding": "lf",
+		"lineWidth": 120
+	},
+
+	"javascript": {
+		"formatter": {
+			"attributePosition": "multiline",
+			"arrowParentheses": "always",
+			"bracketSameLine": true,
+			"bracketSpacing": true,
+			"jsxQuoteStyle": "single",
+			"quoteStyle": "single",
+			"quoteProperties": "asNeeded",
+			"semicolons": "asNeeded",
+			"trailingComma": "none"
+		}
+	},
+
+	"json": {
+		"formatter": {
+			"trailingCommas": "none"
+		}
+	},
+
+	"organizeImports": {
+		"enabled": true
+	},
+
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"style": {
+				"noNonNullAssertion": "off"
+			}
+		}
+	}
+}
