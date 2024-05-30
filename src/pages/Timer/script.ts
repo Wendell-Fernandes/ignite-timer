@@ -4,6 +4,8 @@ export function useTimer() {
 	const [amountOfTime, setAmountOfTime] = useState<number>(0)
 	const [projectName, setProjectName] = useState<string>('')
 
+	const [started] = useState(false)
+
 	function increaseTime() {
 		setAmountOfTime((state) => (state >= 60 ? 0 : state + 1))
 	}
@@ -22,6 +24,7 @@ export function useTimer() {
 	return {
 		amountOfTime,
 		projectName,
+		started,
 		increaseTime,
 		reduceTime,
 		changeProjectName,

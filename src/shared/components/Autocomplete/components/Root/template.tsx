@@ -1,5 +1,6 @@
 import type { ChildrenProp } from '../../../../typings'
+import { Container } from './style'
 
 export function Root({ children }: ChildrenProp) {
-	return <div className='relative'>{children}</div>
+	return <Container>{children}</Container>
 }

@@ -1,14 +1,19 @@
+import { ThemeProvider } from 'styled-components'
 import Routes from './routes'
 import { Header } from './shared/components/Header/template'
-import { Background } from './shared/layouts/Background/template'
+import { Default } from './shared/layouts/Default/template'
+import { GlobalStyle } from './shared/styles/global'
+import { dark } from './shared/themes/dark'
 
 export function App() {
 	return (
-		<>
-			<Background>
+		<ThemeProvider theme={dark}>
+			<Default>
 				<Header />
 				<Routes />
-			</Background>
-		</>
+			</Default>
+
+			<GlobalStyle />
+		</ThemeProvider>
 	)
 }

@@ -1,14 +1,16 @@
-import { Minus, Play, Plus } from '@phosphor-icons/react'
+import { HandPalm, Minus, Play, Plus } from '@phosphor-icons/react'
 import { Autocomplete } from '../../shared/components/Autocomplete'
 import { Tooltip } from '../../shared/components/Tooltip/template'
 import { useTimer } from './script'
+import { Container } from './style'
 
 export function Timer() {
-	const { amountOfTime, projectName, increaseTime, reduceTime, changeProjectName, isDisabled, time } = useTimer()
+	const { amountOfTime, projectName, started, increaseTime, reduceTime, changeProjectName, isDisabled, time } =
+		useTimer()
 
 	return (
-		<main className='w-[41rem] flex flex-col items-center gap-14 mt-[4.6875rem] mb-[9.75rem]'>
-			<div className='flex items-center justify-center gap-2 text-lg font-bold text-gray7 whitespace-nowrap'>
+		<Container>
+			<div className='title'>
 				<p>Vou trabalhar em</p>
 				<Autocomplete.root>
 					<Autocomplete.input
@@ -19,7 +21,7 @@ export function Timer() {
 					<Autocomplete.popper />
 				</Autocomplete.root>
 				<p>durante</p>
-				<div className='flex gap-3 items-center justify-center text-gray6 placeholder:text-gray4 border-b-2 border-gray4 py-2'>
+				<div className='time'>
 					<button
 						type='button'
 						onClickCapture={reduceTime}>
@@ -35,46 +37,52 @@ export function Timer() {
 				<p>minutos.</p>
 			</div>
 
-			<div className='flex justify-center items-center text-[10rem] font-Roboto-mono font-bold text-gray7 leading-tight'>
-				<div className='flex justify-center items-center gap-4'>
+			<div className='timer'>
+				<div>
 					{time
 						.toString()
 						.padStart(2, '0')
 						.split('')
 						.map((element) => (
-							<p
-								key={element}
-								className='bg-gray3 rounded-lg px-4'>
-								{element}
-							</p>
+							<div key={element}>
+								<p>{element}</p>
+							</div>
 						))}
 				</div>
-				<p className='text-green mx-1'>:</p>
-				<div className='flex justify-center items-center gap-4'>
+				<span>:</span>
+				<div>
 					{time
 						.toString()
 						.padStart(2, '0')
 						.split('')
 						.map((element) => (
-							<p
-								key={element}
-								className='bg-gray3 rounded-lg px-4'>
-								{element}
-							</p>
+							<div key={element}>
+								<p>{element}</p>
+							</div>
 						))}
 				</div>
 			</div>
 
-			<div className='w-full'>
-				<button
-					type='button'
-					disabled={isDisabled}
-					className='flex items-center justify-center gap-2 font-bold text-base w-full bg-green disabled:bg-green-dark disabled:text-gray5 py-[1.25rem] rounded-lg group relative disabled:cursor-not-allowed'>
-					<Tooltip text='Preencha o nome e a duração antes de começar.' />
-					<Play size={24} />
-					Começar
-				</button>
+			<div className='button'>
+				{!started ? (
+					<button
+						type='button'
+						disabled={isDisabled}
+						className='start'>
+						<Play size={24} />
+						Começar
+						<Tooltip text='Preencha o nome e a duração antes de começar.' />
+					</button>
+				) : (
+					<button
+						type='button'
+						className='stop'>
+						<HandPalm size={24} />
+						Interromper
+						<Tooltip text='Preencha o nome e a duração antes de começar.' />
+					</button>
+				)}
 			</div>
-		</main>
+		</Container>
 	)
 }
