@@ -4,9 +4,11 @@ export interface ChildrenProp {
 	children: ReactNode
 }
 
-export interface TasksProps {
+export interface Cycle {
+	id: string
 	task: string
-	duration: string
-	start: string
-	status: string
+	duration: number
+	start: Date
+	interrupted?: Date
+	finished?: Date
 }

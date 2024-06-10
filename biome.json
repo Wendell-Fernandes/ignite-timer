@@ -37,9 +37,9 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"style": {
-				"noNonNullAssertion": "off"
-			}
+			"style": { "noNonNullAssertion": "off" },
+			"a11y": { "useValidAriaRole": "off" },
+			"suspicious": { "noArrayIndexKey": "off" }
 		}
 	}
 }

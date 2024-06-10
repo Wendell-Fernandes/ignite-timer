@@ -1,34 +1,34 @@
-import { type ChangeEvent, useState } from 'react'
+import { useEffect } from 'react'
+import { useFormContext } from 'react-hook-form'
+import { useCycles } from '../../shared/contexts/Cycles/context'
+
+interface FormProps {
+	task: string
+	duration: number
+}
 
 export function useTimer() {
-	const [amountOfTime, setAmountOfTime] = useState<number>(0)
-	const [projectName, setProjectName] = useState<string>('')
+	const { handleSubmit, reset, watch, setValue } = useFormContext<FormProps>()
+	const { activeCycle, createNewCycle, interruptCycle } = useCycles()
 
-	const [started] = useState(false)
+	const task = watch('task')
+	const duration = watch('duration')
+	const buttonDisabled = !task || !duration
 
-	function increaseTime() {
-		setAmountOfTime((state) => (state >= 60 ? 0 : state + 1))
+	function handleCreateNewCycle({ duration, task }: FormProps) {
+		createNewCycle({ duration, task })
+		reset()
 	}
 
-	function reduceTime() {
-		setAmountOfTime((state) => (state <= 0 ? 60 : state - 1))
-	}
-
-	function changeProjectName(event: ChangeEvent<HTMLInputElement>) {
-		setProjectName(event.target.value)
-	}
-
-	const isDisabled = projectName.length === 0 || amountOfTime === 0
-	const time = 0
+	useEffect(() => {
+		if (task === '') setValue('duration', 0)
+	}, [task, setValue])
 
 	return {
-		amountOfTime,
-		projectName,
-		started,
-		increaseTime,
-		reduceTime,
-		changeProjectName,
-		isDisabled,
-		time
+		activeCycle,
+		buttonDisabled,
+		handleCreateNewCycle,
+		handleSubmit,
+		interruptCycle
 	}
 }

@@ -1,10 +1,14 @@
-import type { ChildrenProp } from '../../typings'
-import { Container } from './style'
+import { Outlet } from 'react-router-dom'
+import { Header } from '../../components/Header/template'
+import { Container, Frame } from './style'
 
-export function Default({ children }: ChildrenProp) {
+export function Default() {
 	return (
 		<Container>
-			<div className='frame'>{children}</div>
+			<Frame>
+				<Header />
+				<Outlet />
+			</Frame>
 		</Container>
 	)
 }

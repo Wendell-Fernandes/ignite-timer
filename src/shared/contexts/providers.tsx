@@ -1,6 +1,11 @@
 import type { ChildrenProp } from '../typings'
-import { TasksProvider } from './Tasks'
+import { CyclesProvider } from './Cycles/context'
+import { FormProvider } from './Form/context'
 
 export function Providers({ children }: ChildrenProp) {
-	return <TasksProvider>{children}</TasksProvider>
+	return (
+		<FormProvider>
+			<CyclesProvider>{children}</CyclesProvider>
+		</FormProvider>
+	)
 }

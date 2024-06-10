@@ -1,12 +1,20 @@
-import { useState } from 'react'
-import { Container } from './style'
+import { usePopper } from './script'
+import { Container, PopperStyled } from './style'
 
 export function Popper() {
-	const [autocomplete] = useState(['tset', 'teste', 'teste', 'teste', 'teste'])
+	const { cyclesState, changeInputValue } = usePopper()
+	const { cycles } = cyclesState
+
 	return (
 		<Container>
-			{autocomplete?.map((element) => (
-				<span key={element}>{element}</span>
+			{cycles.map(({ id, task, duration }) => (
+				<PopperStyled
+					key={id}
+					type='button'
+					id={String(duration)}
+					onClick={changeInputValue}>
+					{task}
+				</PopperStyled>
 			))}
 		</Container>
 	)

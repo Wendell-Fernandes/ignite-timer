@@ -1,7 +1,7 @@
 import { Scroll, Timer } from '@phosphor-icons/react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { Tooltip } from '../Tooltip/template'
-import { HeaderStyled } from './style'
+import { HeaderStyled, Nav } from './style'
 
 export function Header() {
 	return (
@@ -13,14 +13,20 @@ export function Header() {
 				/>
 			</div>
 
-			<Link to='/'>
-				<Timer size={24} />
-				<Tooltip text='Timer' />
-			</Link>
-			<Link to='/history'>
-				<Scroll size={24} />
-				<Tooltip text='History' />
-			</Link>
+			<Nav>
+				<NavLink
+					to='/'
+					title='timer'>
+					<Timer size={24} />
+					<Tooltip text='Timer' />
+				</NavLink>
+				<NavLink
+					to='/history'
+					title='history'>
+					<Scroll size={24} />
+					<Tooltip text='History' />
+				</NavLink>
+			</Nav>
 		</HeaderStyled>
 	)
 }

@@ -1,18 +1,27 @@
-import type { ChangeEvent } from 'react'
-import { InputStyled } from './style'
+import { useFormContext } from 'react-hook-form'
+import type { RegisterOptions } from 'react-hook-form'
+import { BaseInput } from './style'
 
 interface InputProps {
+	disabled: boolean
+	id: 'task' | 'duration'
 	placeholder: string
-	value: string
-	onChange: (event: ChangeEvent<HTMLInputElement>) => void
+	readonly: boolean
+	type: 'number' | 'text'
+	options?: RegisterOptions
 }
 
-export function Input({ placeholder, onChange, value }: InputProps) {
+export function Input({ disabled, id, placeholder, readonly, type, options }: InputProps) {
+	const { register } = useFormContext()
+
 	return (
-		<InputStyled
+		<BaseInput
+			type={type}
+			autoComplete='off'
+			readOnly={readonly}
+			disabled={disabled}
 			placeholder={placeholder}
-			value={value}
-			onChange={onChange}
+			{...register(id, { ...options })}
 		/>
 	)
 }
